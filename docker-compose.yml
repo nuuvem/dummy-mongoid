@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && rails server -b '0.0.0.0' -p 3000"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: "mongodb://mongo:27017/dummy_mongoid_development"
+
+  mongo:
+    image: mongo:5.0
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-data:
