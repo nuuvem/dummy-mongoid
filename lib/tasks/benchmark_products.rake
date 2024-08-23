@@ -9,20 +9,13 @@ namespace :benchmark do
     [100, 200, 300].each do |count|
       require 'benchmark'
 
-      puts "Time to retrieve product with at least #{count} prices."
-      Benchmark.bmbm do |bm|
-        bm.report { 100.times { Product.with_min_prices_count(count).first } }
-        bm.report { 200.times { Product.with_min_prices_count(count).first } }
-        bm.report { 500.times { Product.with_min_prices_count(count).first } }
-        bm.report { 1000.times { Product.with_min_prices_count(count).first } }
-      end
-
       puts "Time to retrieve base prices for product with #{count} prices."
+
       Benchmark.bmbm do |bm|
-        bm.report { 100.times { Product.with_min_prices_count(count).first.base_prices.first } }
-        bm.report { 200.times { Product.with_min_prices_count(count).first.base_prices.first } }
-        bm.report { 500.times { Product.with_min_prices_count(count).first.base_prices.first } }
-        bm.report { 1000.times { Product.with_min_prices_count(count).first.base_prices.first } }
+        bm.report('100 times') { 100.times { Product.with_min_prices_count(count).first.base_prices.first } }
+        bm.report('200 times') { 200.times { Product.with_min_prices_count(count).first.base_prices.first } }
+        bm.report('500 times') { 500.times { Product.with_min_prices_count(count).first.base_prices.first } }
+        bm.report('1000 times') { 1000.times { Product.with_min_prices_count(count).first.base_prices.first } }
       end
     end
   end

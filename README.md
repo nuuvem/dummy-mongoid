@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to setup and run
 
-Things you may want to cover:
+- `docker compose up --build`
+- `docker exec -it <app-container-id> bin/rails db:setup`
+- `docker exec -it <app-container-id> bin/rails db:mongoid:create_indexes`
+- `docker exec -it <app-container-id> bin/rails db:seed`
+- `docker exec -it <app-container-id> bin/rails benchmark:products`
 
-* Ruby version
+To test on another `mongoid` version, just update the Gemfile to `7.2.6` and run `docker exec -it <app-container-id> bundle` to install it.
 
-* System dependencies
+## Benchmark results
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Mongoid version | Prices count | Time in seconds          |
+| --------------- | ------------ |------------------------- |
+| `7.1.11`        | 100          | 4.479892                 |
+| `7.2.6`         | 100          | 5.500091 (1.23x slower)  |
+| `7.1.11`        | 200          | 8.753541                 |
+| `7.2.6`         | 200          | 9.985221 (1.14x slower)  |
+| `7.1.11`        | 300          | 10.286888                |
+| `7.2.6`         | 300          | 11.853574 (1.15x slower) |
