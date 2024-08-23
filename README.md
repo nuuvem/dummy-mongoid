@@ -21,3 +21,9 @@ To test on another `mongoid` version, just update the Gemfile to `7.2.6` and run
 | `7.2.6`         | 200          | 9.985221 (1.14x slower)  |
 | `7.1.11`        | 300          | 10.286888                |
 | `7.2.6`         | 300          | 11.853574 (1.15x slower) |
+
+## Machine specs
+
+- CPU: 13th Gen Intel(R) Core(TM) i5-13450HX   2.40 GHz
+- RAM: 16,0 GB
+- OS:  Linux 5.15.153.1-microsoft-standard-WSL2
