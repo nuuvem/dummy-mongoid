@@ -5,12 +5,24 @@ Product.delete_all
 
 # Helper method to generate random prices
 def generate_prices(count)
-  Array.new(count) do
-    Price.new(
-      value: rand(1..1000),
-      currency: Faker::Currency.code
-    )
+  # Create the base price
+  base_price = Price.new(
+    value: rand(1..1000),
+    currency: Faker::Currency.code,
+    kind: :base
+  )
+
+  # Generate promo prices
+  promo_prices = Array.new(count - 1) do
+    base_price.clone.tap do |price|
+      price.value = rand(1..1000)
+      price.currency = Faker::Currency.code
+      price.kind = :promo
+    end
   end
+
+  # Combine base price and promo prices
+  [base_price] + promo_prices
 end
 
 # List of price counts to create
