@@ -14,7 +14,7 @@ class Product
   index({'prices.created_at' => -1}, background: true)
   index({'prices.updated_at' => -1}, background: true)
 
-  scope :with_min_price_count, ->(min_count) {
+  scope :with_min_prices_count, ->(min_count) {
     where(:'$expr' => { :$gte => [ { :$size => "$prices" }, min_count ] })
   }
 
