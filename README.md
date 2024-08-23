@@ -3,8 +3,10 @@
 ## How to setup and run
 
 - `docker compose up --build`
-- `docker exec -it <app-container-id> bin/rails db:setup`
+- `docker exec -it <app-container-id> bin/rails db:drop`
+- `docker exec -it <app-container-id> bin/rails db:create`
 - `docker exec -it <app-container-id> bin/rails db:mongoid:create_indexes`
+- `docker exec -it <app-container-id> bin/rails db:seed`
 - `docker exec -it <app-container-id> bin/rails benchmark:products`
 
 To test on another `mongoid` version, just update the Gemfile to `7.2.6` and run `docker exec -it <app-container-id> bundle` to install it.
